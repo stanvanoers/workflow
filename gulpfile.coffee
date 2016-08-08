@@ -2,7 +2,7 @@
 gulp = require("gulp")
 sass = require("gulp-sass")
 autoprefixer = require("gulp-autoprefixer")
-minify = require("gulp-minify-css")
+minify = require("gulp-clean-css")
 uglify = require("gulp-uglify")
 concat = require("gulp-concat")
 browerify = require("gulp-browserify")
@@ -10,41 +10,50 @@ plumber = require("gulp-plumber")
 pug = require("gulp-pug")
 server = require("gulp-develop-server")
 livereload = require("gulp-livereload")
+path = require("path")
+fs = require("fs")
+
+# Setings
+config = JSON.parse(fs.readFileSync('./config.json'))
 
 # Gulp -> Jade pages
 gulp.task "pages", ->
-  gulp.src "./structure/pages/**/*.pug"
+  gulp.src path.join(__dirname, config.paths.pages, "/**/*.pug")
     .pipe plumber()
-    .pipe pug()
-    .pipe gulp.dest("./static")
+    .pipe pug({
+      data:{
+          config: config
+        }
+      })
+    .pipe gulp.dest(path.join(__dirname, config.paths.server))
     .pipe(livereload())
 
 # Gulp -> SASS
 gulp.task "styles", ->
-    gulp.src "./styles/main.sass"
+    gulp.src path.join(__dirname, config.paths.styles, config.entry.styles)
       .pipe plumber()
       .pipe sass({indentedSyntax: true})
       .pipe autoprefixer({ browsers: ["> 1%"]})
       .pipe minify()
-      .pipe concat("bundle.css")
-      .pipe gulp.dest("./static")
+      .pipe concat(config.output.styles)
+      .pipe gulp.dest(path.join(__dirname, config.paths.server))
       .pipe(livereload())
 
 # Gulp -> Coffeescript
 gulp.task "scripts", ->
-  gulp.src "./scripts/main.coffee", {read: false}
+  gulp.src path.join(__dirname, config.paths.scripts, config.entry.scripts), {read: false}
     .pipe plumber()
     .pipe browerify({transform: ["coffeeify", "pugify"]})
-    .pipe concat("bundle.js")
+    .pipe concat(config.output.scripts)
     .pipe uglify()
-    .pipe gulp.dest("./static")
+    .pipe gulp.dest(path.join(__dirname, config.paths.server))
     .pipe(livereload())
 
 # Gulp -> Watchers
 gulp.task "watch", ->
-  gulp.watch "./styles/**/*.sass", ["styles"]
-  gulp.watch "./scripts/**/*.coffee", ["scripts"]
-  gulp.watch "./structure/pages/**/*.pug", ["pages"]
+  gulp.watch path.join(__dirname, config.paths.styles ,"/**/*.sass"), ["styles"]
+  gulp.watch path.join(__dirname, config.paths.scripts ,"/**/*.coffee"), ["scripts"]
+  gulp.watch path.join(__dirname, config.paths.structure ,"/**/*.pug"), ["pages"]
 
 # Gulp -> Server
 gulp.task "server", ->

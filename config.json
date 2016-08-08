@@ -1,0 +1,29 @@
+{
+  "author": "Stan van Oers",
+  "name": "workflow",
+  "paths": {
+    "scripts": "scripts",
+    "server": "static",
+    "pages": "structure/pages",
+    "structure": "structure",
+    "styles": "styles",
+    "data": "data"
+  },
+  "server": {
+    "localhost": false,
+    "port": 9000,
+    "livereload": 35729
+  },
+  "entry": {
+    "styles": "main.sass",
+    "scripts": "main.coffee"
+  },
+  "output": {
+    "styles": "bundle.css",
+    "scripts": "bundle.js"
+  },
+  "data": {
+    "previewData": "data.json"
+  }
+
+}

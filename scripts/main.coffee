@@ -4,4 +4,4 @@ welcomeMessageContainer.innerHTML = welcomeMessage({yourName: "Stan"})
 
 setTimeout ->
   welcomeMessageContainer.classList.add "active"
-, 200
+, 300
