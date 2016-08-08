@@ -1,7 +1,7 @@
 {
-  "name": "Workflow Gulp Sass Coffeescript and Pug",
+  "name": "workflow",
   "version": "1.0.0",
-  "description": "Easy starter for Jade Sass Coffee workflow",
+  "description": "Easy starter for Pug Sass Coffee workflow",
   "main": "gulpfile.js",
   "dependencies": {
     "coffee-script": "^1.10.0",
@@ -15,12 +15,10 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-browserify": "^0.5.1",
+    "gulp-clean-css": "^2.0.12",
     "gulp-concat": "^2.6.0",
     "gulp-develop-server": "^0.5.2",
-    "gulp-fontgen": "^0.2.5",
-    "gulp-jade": "^1.1.0",
     "gulp-livereload": "^3.8.1",
-    "gulp-minify-css": "^1.2.4",
     "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.0.4",
     "gulp-sass": "^2.3.2",
@@ -41,6 +39,6 @@
     "Browserify",
     "Front-end"
   ],
-  "author": "Stan van Oesr",
+  "author": "Stan van Oers",
   "license": "ISC"
 }
