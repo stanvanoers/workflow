@@ -1,6 +1,6 @@
 {
   "author": "Stan van Oers",
-  "name": "workflow",
+  "name": "Workflow",
   "paths": {
     "scripts": "scripts",
     "server": "static",

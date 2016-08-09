@@ -16,14 +16,20 @@ fs = require("fs")
 # Setings
 config = JSON.parse(fs.readFileSync('./config.json'))
 
+DataCollectionsObject = ->
+  data = {}
+  data.config = config
+  for collection, url of config.data
+    data[collection] = JSON.parse(fs.readFileSync(path.join(__dirname, config.paths.data, url)))
+
+  return data
+
 # Gulp -> Jade pages
 gulp.task "pages", ->
   gulp.src path.join(__dirname, config.paths.pages, "/**/*.pug")
     .pipe plumber()
     .pipe pug({
-      data:{
-          config: config
-        }
+      data: DataCollectionsObject()
       })
     .pipe gulp.dest(path.join(__dirname, config.paths.server))
     .pipe(livereload())
