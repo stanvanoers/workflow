@@ -20,6 +20,7 @@
     "gulp-develop-server": "^0.5.2",
     "gulp-livereload": "^3.8.1",
     "gulp-plumber": "^1.1.0",
+    "gulp-plumber-notifier": "0.0.3",
     "gulp-pug": "^3.0.4",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
